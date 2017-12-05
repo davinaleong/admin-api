@@ -1,0 +1,46 @@
+TODO List:
+
+A. Datetime helper
+B. Tables for Admin:
+    - Table Names
+    - Access Rights
+    - Account Statuses
+    - User
+    - User Log
+C. Migrations
+D. Models:
+    - Table Names
+    - Access Rights
+    - Account Statuses
+    - User
+    - User Log
+E. Controllers:
+    - Authenticate
+    - Admin
+    - User
+    - Personal Profile
+F. Pages:
+    - Login
+    - Welcome
+    - Manage Users:
+        - Browse Users
+        - New User
+        - View User
+        - Edit User
+        - Reset Password
+    - Personal Profile:
+        - View
+        - Edit
+        - Change Password
+G. Unit Tests:
+    - Models:
+        - Table Names
+        - Access Rights
+        - Account Statuses
+        - User
+        - User Log
+    - Controllers:
+        - Authenticate
+        - Admin
+        - User
+        - Personal Profile

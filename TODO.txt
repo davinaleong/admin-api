@@ -14,11 +14,33 @@ B. Tables for Admin:
     - User Log
 C. Migrations
 D. Models:
-    - Table Names
     - Access Rights
+        - access_right_id
+        - ar_name
+        - ar_value
+        - ar_description
+        - timestamp
+        - last_updated
     - Account Statuses
+        - account_status_id
+        - as_value
+        - as_description
+        - timestamp
+        - last_updated
     - User
+        - user_id
+        - username
+        - name
+        - password_hash
+        - access_rights
+        - account_status
+        - timestamp
+        - last_updated
     - User Log
+        - user_log_id
+        - user_id
+        - log
+        - timestamp
 E. Controllers:
     - Authenticate
     - Admin

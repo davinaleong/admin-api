@@ -16,16 +16,18 @@ class Migration_Initial_setup extends CI_Migration
 			'username' => 'admin',
 			'name' => 'Default Admin',
 			'password_hash' => password_hash('password', PASSWORD_DEFAULT),
-			'email' => 'admin@example.com',
 			'access' => 'A',
-			'status' => 'Active'
+			'account_status' => 'Active'
 		);
 		$admin['user_id'] = $this->User_model->insert($admin);
 	
 		if(ENVIRONMENT !== 'testing')
 		{
-			echo "<code>" . $output . "</code><hr/>";
-			echo $admin['user_id'] > 0 ? "<p>Default Admin account created.</p>" : "<p>Failed to create Default Admin account.</p>";
+			echo '<html lang="en"><head><title>Admin API - Migrations</title></head><body>';
+			echo '<h1>Migrations</h1>';
+			echo '<code>' . $output . '</code><hr/>';
+			echo $admin['user_id'] > 0 ? '<p>Default Admin account created.</p>' : '<p>Failed to create Default Admin account.</p>';
+			echo '</body></html>';
 		}
 	}
 	
@@ -95,6 +97,8 @@ class Migration_Initial_setup extends CI_Migration
 			DROP TABLE IF EXISTS `ci_sessions`;
 			DROP TABLE IF EXISTS `user`;
 			DROP TABLE IF EXISTS `user_log`;
+			DROP TABLE IF EXISTS `access_right`;
+			DROP TABLE IF EXISTS `account_status`;
 		";
 		return $sql;
 	}

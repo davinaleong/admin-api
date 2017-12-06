@@ -7,7 +7,6 @@ TODO List:
 
 A. Datetime helper
 B. Tables for Admin:
-    - Table Names
     - Access Rights
     - Account Statuses
     - User

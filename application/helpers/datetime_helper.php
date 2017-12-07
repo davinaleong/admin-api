@@ -7,21 +7,21 @@ function format($datetime_str='', $format_str='', $time_zone=DATETIME_ZONE) {
 }
 
 function now($format_str='', $time_zone=DATETIME_ZONE) {
-    return $this->format('now', $format_str, $time_zone);
+    return format('now', $format_str, $time_zone);
 }
 
 function today($format_str='', $time_zone=DATETIME_ZONE) {
-    return $this->format('today', $format_str, $time_zone);
+    return format('today', $format_str, $time_zone);
 }
 
 function format_mysql($datetime_str='', $time_zone=DATETIME_ZONE) {
-    return $this->format($datetime_str, MYSQL_DATETIME_FORMAT, DATETIME_ZONE);
+    return format($datetime_str, MYSQL_DATETIME_FORMAT, DATETIME_ZONE);
 }
 
 function format_system($datetime_str='', $time_zone=DATETIME_ZONE) {
-    return $this->format($datetime_str, SYSTEM_DATETIME_FORMAT, DATETIME_ZONE);
+    return format($datetime_str, SYSTEM_DATETIME_FORMAT, DATETIME_ZONE);
 }
 
 function format_default($datetime_str='', $time_zone=DATETIME_ZONE) {
-    return $this->format($datetime_str, DISPLAY_DATETIME_FORMAT, DATETIME_ZONE);
+    return format($datetime_str, DISPLAY_DATETIME_FORMAT, DATETIME_ZONE);
 }

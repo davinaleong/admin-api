@@ -12,6 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 ***********************************************************************************/
 ?><!-- Scripts -->
-<script src="../vendor/jquery/jquery.slim.min.js"></script>
-<script src="../vendor/popperjs/umd/popper.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?=STATIC_REPO;?>vendor/jquery.slim.min.js"></script>
+	<script src="<?=STATIC_REPO;?>vendor/popperjs/umd/popper.min.js"></script>
+	<script src="<?=STATIC_REPO;?>vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -14,33 +14,68 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             font-family: sans-serif;
         }
 
+        #div-content, #div-footer {
+            text-align: center;
+        }
+
         #div-content {
-            margin-top: 30%;
+            margin-top: 25%;
+        }
+
+        .bg-darker {
+            background: #333;
+        }
+
+        .status-start {
+            margin-left: 0.2rem;
+            padding: 0.2rem 0.3rem;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .status-end {
+            margin-right: 0.2rem;
+            padding: 0.2rem 0.3rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        #div-footer {
+            margin-top: 2rem;
+            color: #868e96;
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+
+        #div-footer > p {
+            margin: 0;
         }
     </style>
 </head>
 <body class="bg-dark text-light">
     <section id="section-main" class="container">
-        <div id="div-content" class="text-center">
+        <div id="div-content">
             <h1 class="display-3">Admin API</h1>
-            <?php switch(ENVIRONMENT) {
+            <span><?php switch(ENVIRONMENT) {
 
                 case 'localhost':
-                    echo '<p class="lead">env: <span class="badge badge-success">' . strtoupper(ENVIRONMENT) . '</span></p>';
+                    echo '<span class="status-start bg-secondary"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-success">' . strtoupper(ENVIRONMENT) . '</span>';
                     break;
 
                 case 'testing':
-                    echo '<p class="lead">env: <span class="badge badge-warning">' . strtoupper(ENVIRONMENT) . '</span></p>';
+                    echo '<span class="status-start bg-secondary"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-warning">' . strtoupper(ENVIRONMENT) . '</span>';
                     break;
 
                 case 'staging':
-                    echo '<p class="lead">env: <span class="badge badge-danger">' . strtoupper(ENVIRONMENT) . '</span></p>';
+                    echo '<span class="status-start bg-secondary"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-danger">' . strtoupper(ENVIRONMENT) . '</span>';
                     break;
 
                 default:
                     break;
-            } ?>
-            <p>You are accessing an interface for programmers.<br/>You if came here by chance, click <a id="click-here" class="text-info" href="javascript:history.back()">here</a> to go back.</p>
+            } ?><span class="status-start bg-secondary"><i class="fa fa-cog fa-fw"></i></span><span class="status-end bg-primary"><?= strtoupper(VERSION_NO); ?></span></p>
+            <p>You are accessing an interface for programmers.<br/>You if came here by accident, click <a id="click-here" class="text-info" href="javascript:history.back()">here</a> to go back.</p>
+        </div>
+        <div id="div-footer">
+            <p>Admin API <i class="fa fa-copyright fa-fw"></i> Davina Leong, <?=now('Y');?>. All rights reserved.</p>
+            <p class="text-warning"><i class="fa fa-exclamation-triangle fa-fw"></i> Warning: Any unauthorized access will be reported to the respective authorities.</p>
         </div>
     </section>
 

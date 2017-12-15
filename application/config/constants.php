@@ -89,7 +89,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | Custom Constants
 |--------------------------------------------------------------------------
 */
-define('STATIC_REPO',                       'http://localhost/admin=api/static_repo/');
+define('VERSION_NO',                        '0.0.1');
+define('STATIC_REPO',                       'http://localhost/admin-api/resources/');
 
 define('DATETIME_ZONE',                     'Asia/Singapore');
 define('MYSQL_DATETIME_FORMAT',             'Y-m-d H:i:s');

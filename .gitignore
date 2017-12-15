@@ -34,3 +34,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 #-------------------------
 static_repo/node_modules
 application/tests/build
+resources/node_modules/

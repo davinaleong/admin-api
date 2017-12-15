@@ -12,70 +12,72 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <style>
         html, body {
             font-family: sans-serif;
+            background: #222;
+            color: #eee;
         }
 
-        #div-content, #div-footer {
-            text-align: center;
+        #card-content {
+            margin-top: 22%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 600px;
         }
 
-        #div-content {
-            margin-top: 25%;
-        }
-
-        .bg-darker {
-            background: #333;
+        .status-start,
+        .status-end {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.3rem;
         }
 
         .status-start {
             margin-left: 0.2rem;
-            padding: 0.2rem 0.3rem;
             border-radius: 4px 0 0 4px;
+            background: #666;
         }
 
         .status-end {
+            font-weight: 600;
             margin-right: 0.2rem;
-            padding: 0.2rem 0.3rem;
             border-radius: 0 4px 4px 0;
         }
-
-        #div-footer {
-            margin-top: 2rem;
-            color: #868e96;
-            font-style: italic;
+        
+        .card > .card-footer {
             font-size: 0.8rem;
         }
 
-        #div-footer > p {
+        p {
             margin: 0;
         }
     </style>
 </head>
-<body class="bg-dark text-light">
+<body>
     <section id="section-main" class="container">
-        <div id="div-content">
-            <h1 class="display-3">Admin API</h1>
-            <span><?php switch(ENVIRONMENT) {
+        <div id="card-content" class="card text-white bg-dark mb-3 text-center">
+            <div class="card-body">
+                <h1 class="card-title display-3">Admin API</h1>
+                <span><?php switch(ENVIRONMENT) {
 
-                case 'localhost':
-                    echo '<span class="status-start bg-secondary"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-success">' . strtoupper(ENVIRONMENT) . '</span>';
-                    break;
+                    case 'localhost':
+                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-success">' . strtoupper(ENVIRONMENT) . '</span>';
+                        break;
 
-                case 'testing':
-                    echo '<span class="status-start bg-secondary"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-warning">' . strtoupper(ENVIRONMENT) . '</span>';
-                    break;
+                    case 'testing':
+                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-warning">' . strtoupper(ENVIRONMENT) . '</span>';
+                        break;
 
-                case 'staging':
-                    echo '<span class="status-start bg-secondary"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-danger">' . strtoupper(ENVIRONMENT) . '</span>';
-                    break;
+                    case 'staging':
+                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-danger">' . strtoupper(ENVIRONMENT) . '</span>';
+                        break;
 
-                default:
-                    break;
-            } ?><span class="status-start bg-secondary"><i class="fa fa-cog fa-fw"></i></span><span class="status-end bg-primary"><?= strtoupper(VERSION_NO); ?></span></p>
-            <p>You are accessing an interface for programmers.<br/>You if came here by accident, click <a id="click-here" class="text-info" href="javascript:history.back()">here</a> to go back.</p>
-        </div>
-        <div id="div-footer">
-            <p>Admin API <i class="fa fa-copyright fa-fw"></i> Davina Leong, <?=now('Y');?>. All rights reserved.</p>
-            <p class="text-warning"><i class="fa fa-exclamation-triangle fa-fw"></i> Warning: Any unauthorized access will be reported to the respective authorities.</p>
+                    default:
+                        break;
+                } ?><span class="status-start"><i class="fa fa-cog fa-fw"></i></span><span class="status-end bg-primary"><?= strtoupper(VERSION_NO); ?></span></p>
+                <p>You are accessing an interface for programmers.<br/>You if came here by accident, click <a id="click-here" class="text-info" href="javascript:history.back()">here</a> to go back.</p>
+            </div>
+            <div class="card-footer">
+                <p>Admin API <i class="fa fa-copyright fa-fw"></i> Davina Leong, <?=now('Y');?>. All rights reserved.</p>
+                <p class="text-warning"><i class="fa fa-exclamation-triangle fa-fw"></i> Warning: Any unauthorized access will be reported to the respective authorities.</p>
+            </div>
         </div>
     </section>
 

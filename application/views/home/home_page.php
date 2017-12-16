@@ -36,7 +36,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 
         .status-end {
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
             margin-right: 0.2rem;
             border-radius: 0 4px 4px 0;
         }
@@ -48,35 +49,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         p {
             margin: 0;
         }
+
+        .text-italic {
+            font-style: italic;
+        }
+
+        .text-clear {
+            font-style: normal;
+        }
     </style>
 </head>
 <body>
     <section id="section-main" class="container">
-        <div id="card-content" class="card text-white bg-dark mb-3 text-center">
+        <div id="card-content" class="card text-light bg-dark mb-3 text-center">
             <div class="card-body">
                 <h1 class="card-title display-3">Admin API</h1>
                 <span><?php switch(ENVIRONMENT) {
 
                     case 'localhost':
-                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-success">' . strtoupper(ENVIRONMENT) . '</span>';
+                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-success">' . ENVIRONMENT . '</span>';
                         break;
 
                     case 'testing':
-                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-warning">' . strtoupper(ENVIRONMENT) . '</span>';
+                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-warning">' . ENVIRONMENT . '</span>';
                         break;
 
                     case 'staging':
-                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-danger">' . strtoupper(ENVIRONMENT) . '</span>';
+                        echo '<span class="status-start"><i class="fa fa-cubes fa-fw"></i></span><span class="status-end bg-danger">' . ENVIRONMENT . '</span>';
                         break;
 
                     default:
                         break;
-                } ?><span class="status-start"><i class="fa fa-cog fa-fw"></i></span><span class="status-end bg-primary"><?= strtoupper(VERSION_NO); ?></span></p>
-                <p>You are accessing an interface for programmers.<br/>You if came here by accident, click <a id="click-here" class="text-info" href="javascript:history.back()">here</a> to go back.</p>
+                } ?><span class="status-start"><i class="fa fa-cog fa-fw"></i></span><span class="status-end text-dark bg-light"><?= VERSION_NO; ?></span></p>
+                <p>You are accessing an interface for programmers.<br/>You if came here by accident, click <a id="click-here" class="text-warning" href="javascript:history.back()">here</a> to go back.</p>
             </div>
-            <div class="card-footer">
-                <p>Admin API <i class="fa fa-copyright fa-fw"></i> Davina Leong, <?=now('Y');?>. All rights reserved.</p>
-                <p class="text-warning"><i class="fa fa-exclamation-triangle fa-fw"></i> Warning: Any unauthorized access will be reported to the respective authorities.</p>
+            <div class="card-footer text-italic">
+                <p class="text-secondary">Admin API <i class="fa fa-copyright fa-fw"></i> Davina Leong, <?=now('Y');?>. All rights reserved.</p>
+                <p class="text-danger"><i class="fa fa-exclamation-triangle fa-fw"></i> Warning: Any unauthorized access will be <span class="text-clear">reported</span> to the respective authorities.</p>
             </div>
         </div>
     </section>

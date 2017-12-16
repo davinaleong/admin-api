@@ -53,19 +53,29 @@ class Authentication_model extends CI_Model {
         return $valid;
     }
 
-    public function validate_access_super_admin_only() {
+    public function validate_access_super_only() {
         $this->load->library('session');
         return $this->validate_user_access("S", $this->session->userdata('access'));
     }
 
     public function validate_access_admin_only() {
         $this->load->library('session');
-        return $this->validate_user_access("A", $this->session->userdata('access'))
+        return $this->validate_user_access("A", $this->session->userdata('access'));
     }
 
     public function validate_access_admin() {
         $this->load->library('session');
-        return $this->validate_user_access("SA", $this->session->userdata('access'))
+        return $this->validate_user_access("SA", $this->session->userdata('access'));
+    }
+
+    public function validate_access_user_only() {
+        $this->load->library('session');
+        return $this->validate_user_access("U", $this->session->userdata('access'));
+    }
+
+    public function validate_access_all() {
+        $this->load->library('session');
+        return $this->validate_user_access("SAU", $this->session->userdata('access'));
     }
 
     private function _resolve_invalid_access() {

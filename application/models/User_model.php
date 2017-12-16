@@ -5,7 +5,7 @@ class User_model extends CI_Model {
 
     const TABLE_NAME = 'user';
 
-    public function get_all($order_by_col='last_updated', $direction='ASC') {
+    public function get_all($order_by_col='last_updated', $direction='DESC') {
         $this->db->order_by($order_by_col, $direction);
         $query = $this->db->get($this::TABLE_NAME);
         return $query->row_array();

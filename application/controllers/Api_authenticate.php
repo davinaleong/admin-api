@@ -7,6 +7,7 @@ class Api_authenticate extends CI_Controller {
         parent::__construct();
 
         $this->load->model('Authentication_model');
+        $this->load->model('User_log_model');
         $this->load->library('session');
     }
 

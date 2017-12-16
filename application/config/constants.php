@@ -91,6 +91,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 */
 define('VERSION_NO',                        '0.0.1');
 define('STATIC_REPO',                       'http://localhost/admin-api/resources/');
+define('STR_MAX_LENGTH',                    64);
 
 define('DATETIME_ZONE',                     'Asia/Singapore');
 define('MYSQL_DATETIME_FORMAT',             'Y-m-d H:i:s');

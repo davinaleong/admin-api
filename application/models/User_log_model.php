@@ -4,9 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User_log_model extends CI_Model
 {
+    const TABLE_NAME = 'user_log';
+
     public function get_all()
     {
-        $query = $this->db->get('user_log');
+        $query = $this->db->get($this::TABLE_NAME);
         return $query->result_array();
     }
 
@@ -18,7 +20,7 @@ class User_log_model extends CI_Model
         );
 
         $this->db->set('timestamp', now(MYSQL_DATE_FORMAT));
-        $this->db->insert('user_log', $temp_array);
+        $this->db->insert($this::TABLE_NAME, $temp_array);
         return $this->db->insert_id();
     }
 

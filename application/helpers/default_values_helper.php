@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-function table_names($tn_key) {
+function table_names($key) {
     $array = array(
         'Access Right' => 'access_right',
         'Access Rights' => 'access_right',
@@ -9,6 +9,17 @@ function table_names($tn_key) {
         'User' => 'user',
         'User Log' => 'user_log'
     );
+    return get_array_value_by_key($array, $key);
+}
+
+function max_lengths($key) {
+    $array = array(
+        'varchar' => 64,
+        'access' => 8,
+        'password_hash' => 128,
+        'text' => 512
+    );
+
     return get_array_value_by_key($array, $key);
 }
 

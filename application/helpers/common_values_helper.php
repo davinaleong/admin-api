@@ -22,3 +22,5 @@ function record_status() {
         'Published'
     );
 }
+
+//end of script

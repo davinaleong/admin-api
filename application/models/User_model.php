@@ -20,15 +20,25 @@ class User_model extends CI_Model {
         }
     }
 
+    public function get_by_user_hash($user_hash=FALSE) {
+        if($user_hash !== FALSE) {
+            $query = $this->db->get_where($this::TABLE_NAME, array('user_hash' => $user_hash));
+            return $query->row_array();
+        } else {
+            return FALSE;
+        }
+    }
+
     public function insert($user=FALSE) {
         if($user !== FALSE) {
             $temp_array = array();
             foreach($user as $key=>$value) {
-                if($key !== 'user_id' || $key !== 'timestamp' || $key !== 'last_updated') {
+                if( ! in_array($key, $this->_fields_not_to_update())) {
                     $temp_array[$key] = $value;
                 }
             }
 
+            $this->db->set('user_hash', md5(uniqid(TRUE)));
             $this->db->set('timestamp', now(MYSQL_DATETIME_FORMAT));
             $this->db->set('last_updated', now(MYSQL_DATETIME_FORMAT));
             $this->db->insert($this::TABLE_NAME, $temp_array);
@@ -42,7 +52,7 @@ class User_model extends CI_Model {
         if($user !== FALSE) {
             $temp_array = array();
             foreach($user as $key=>$value) {
-                if($key !== 'user_id' || $key !== 'timestamp' || $key !== 'last_updated') {
+                if( ! in_array($key, $this->_fields_not_to_update())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -53,6 +63,15 @@ class User_model extends CI_Model {
         } else {
             return FALSE;
         }
+    }
+
+    private function _fields_not_to_update() {
+        return array(
+            'user_id',
+            'user_hash',
+            'timestamp',
+            'last_updated'
+        );
     }
 
 } //end User_model class

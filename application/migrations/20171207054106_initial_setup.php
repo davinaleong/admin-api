@@ -51,6 +51,7 @@ class Migration_Initial_setup extends CI_Migration
 			
 			CREATE TABLE `user` (
 				`user_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+				`user_hash` VARCHAR(32) DEFAULT NULL,
 				`username` VARCHAR(64) DEFAULT NULL,
 				`name` VARCHAR(64) DEFAULT NULL,
 				`password_hash` VARCHAR(128) DEFAULT NULL,
@@ -91,15 +92,15 @@ class Migration_Initial_setup extends CI_Migration
 
 
 			INSERT INTO `access_right` (`ar_value`, `ar_name`, `ar_color`)
-			VALUES ('S', 'Super Admin', 'danger'),
-				('A', 'Admin', 'primary'),
-				('U', 'User', 'secondary');
+			VALUES ('A', 'Admin', 'primary');
 
 			INSERT INTO `account_status` (`as_name`, `as_color`, `as_description`)
-			VALUES ('Unverified', 'warning', 'Denotes if the email tied to this account has been verified.'),
-				('Active', 'success', 'Account has usage to the system as his/her access rights allow.'),
-				('Suspended', 'danger', 'Account has been temporarily disabled.'),
-				('Deactivated', 'secondary', 'Account is no longer in use.');
+			VALUES ('Active', 'success', 'Account has usage to the system as his/her access rights allow.');
+
+			INSERT INTO `user_log` (`user_id`, `log`)
+			VALUES (0, 'Access Right record created from migrations. | access_right_id: 1'),
+				(0, 'Account Status created from migrations. | account_status_id: 1'),
+				(0, 'User record created from migrations. | user_id: 1');
 		";
 		return $sql;
 	}

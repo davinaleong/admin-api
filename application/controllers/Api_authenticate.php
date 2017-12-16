@@ -36,7 +36,7 @@ class Api_authenticate extends CI_Controller {
                     if(password_verify($this->input->post('password'), $user['password_hash'])) {
                         $this->_set_session_data($user);
 
-                        $this->User_log_model->log_message('User logged in.');
+                        $this->User_log_model->log('User logged in.');
                         json_response(
                             'Login successful',
                             'success'
@@ -69,7 +69,7 @@ class Api_authenticate extends CI_Controller {
 
     public function json_logout() {
         $this->_unset_session_data();
-        $this->User_log_model->log_message('User is logged out.');
+        $this->User_log_model->log('User is logged out.');
         json_response(
             'You have logged out.',
             'success'

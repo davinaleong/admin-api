@@ -16,8 +16,16 @@ function max_lengths($key) {
     $array = array(
         'varchar' => 64,
         'access' => 8,
-        'password_hash' => 128,
+        'password' => 12,
         'text' => 512
+    );
+
+    return get_array_value_by_key($array, $key);
+}
+
+function min_lengths($key) {
+    $array = array(
+        'password' => 6
     );
 
     return get_array_value_by_key($array, $key);

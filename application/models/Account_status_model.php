@@ -21,11 +21,20 @@ class Account_status_model extends CI_Model
         }
     }
 
+    public function get_statuses_as_concatenated_string($seperator=',') {
+        $sql = "
+            SELECT GROUP_CONCAT(`as_name` SEPARATOR ?) AS `account_statuses`
+            FROM `account_status`
+        ";
+        $query = $this->db->query($sql, array($seperator));
+        return $query->row_array()['account_statuses'];
+    }
+
     public function insert($account_status=FALSE) {
         if($account_status !== FALSE) {
             $temp_array = array();
             foreach($account_status as $key=>$value) {
-                if($key !== 'account_status_id' || $key !== 'timestamp' || $key !== 'last_updated') {
+                if( ! in_array($key, $this->_fields_not_to_update())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -43,7 +52,7 @@ class Account_status_model extends CI_Model
         if($account_status !== FALSE) {
             $temp_array = array();
             foreach($account_status as $key=>$value) {
-                if($key !== 'account_status_id' || $key !== 'timestamp' || $key !== 'last_updated') {
+                if( ! in_array($key, $this->_fields_not_to_update())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -63,6 +72,14 @@ class Account_status_model extends CI_Model
         } else {
             return FALSE;
         }
+    }
+
+    private function _fields_not_to_update() {
+        return array(
+            'account_status_id',
+            'timestamp',
+            'last_updated'
+        );
     }
 
 } // end Account_status_model controller class

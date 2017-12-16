@@ -21,11 +21,20 @@ class Access_right_model extends CI_Model
         }
     }
 
+    public function get_values_as_concatenated_string($seperator=',') {
+        $sql = "
+            SELECT GROUP_CONCAT(`ar_value` SEPARATOR ?) AS `access_rights`
+            FROM `access_right`
+        ";
+        $query = $this->db->query($sql, array($seperator));
+        return $query->row_array()['access_rights'];
+    }
+
     public function insert($access_right=FALSE) {
         if($access_right !== FALSE) {
             $temp_array = array();
             foreach($access_right as $key=>$value) {
-                if($key !== 'access_right_id' || $key !== 'timestamp' || $key !== 'last_updated') {
+                if( ! in_array($key, $this->_fields_not_to_update())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -43,7 +52,7 @@ class Access_right_model extends CI_Model
         if($access_right !== FALSE) {
             $temp_array = array();
             foreach($access_right as $key=>$value) {
-                if($key !== 'access_right_id' || $key !== 'timestamp' || $key !== 'last_updated') {
+                if( ! in_array($key, $this->_fields_not_to_update())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -63,6 +72,14 @@ class Access_right_model extends CI_Model
         } else {
             return FALSE;
         }
+    }
+
+    private function _fields_not_to_update() {
+        return array(
+            'access_right_id',
+            'timestamp',
+            'last_updated'
+        );
     }
 
 } // end Access_right_model controller class

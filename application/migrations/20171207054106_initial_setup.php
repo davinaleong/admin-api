@@ -92,7 +92,7 @@ class Migration_Initial_setup extends CI_Migration
 
 			INSERT INTO `access_right` (`ar_value`, `ar_name`, `ar_color`)
 			VALUES ('S', 'Super Admin', 'danger'),
-				('A', 'Admin', 'primary')
+				('A', 'Admin', 'primary'),
 				('U', 'User', 'secondary');
 
 			INSERT INTO `account_status` (`as_name`, `as_color`, `as_description`)

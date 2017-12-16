@@ -85,4 +85,11 @@ function json_response($message, $status, $additional_data=NULL) {
     $CI =& get_instance();
     $CI->output->set_content_type(content_type('JSON'))->set_output(json_encode($json_response));
 }
+
+function json_response_page_not_found() {
+    json_response(
+        'Page not found',
+        'error'
+    );
+}
 //end of script

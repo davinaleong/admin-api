@@ -73,7 +73,7 @@ class Migration_Initial_setup extends CI_Migration
 				`access_right_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 				`ar_name` VARCHAR(64) DEFAULT NULL,
 				`ar_value` VARCHAR(8) DEFAULT NULL,
-				`ar_description` VARCHAR(128) DEFAULT NULL,
+				`ar_color` VARCHAR(64) DEFAULT NULL,
 				`timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				`last_updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				PRIMARY KEY (`access_right_id`)
@@ -81,12 +81,26 @@ class Migration_Initial_setup extends CI_Migration
 
 			CREATE TABLE `account_status` (
 				`account_status_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-				`ar_value` VARCHAR(64) DEFAULT NULL,
-				`as_description` VARCHAR(64) DEFAULT NULL,
+				`as_name` VARCHAR(64) DEFAULT NULL,
+				`as_color` VARCHAR(64) DEFAULT NULL,
+				`as_description` VARCHAR(128) DEFAULT NULL,
 				`timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				`last_updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				PRIMARY KEY (`account_status_id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+			INSERT INTO `access_right` (`ar_value`, `ar_name`, `ar_color`)
+			VALUES ('S', 'Super Admin', 'danger'),
+				('A', 'Admin', 'primary'),
+				('M', 'Manager', 'info'),
+				('U', 'User', 'secondary');
+
+			INSERT INTO `account_status` (`as_name`, `as_color`, `as_description`)
+			VALUES ('Unverified', 'warning', 'Denotes if the email tied to this account has been verified.'),
+				('Active', 'success', 'Account has usage to the system as his/her access rights allow.'),
+				('Suspended', 'danger', 'Account has been temporarily disabled.'),
+				('Deactivated', 'secondary', 'Account is no longer in use.');
 		";
 		return $sql;
 	}

@@ -43,7 +43,7 @@ class Account_status_model extends CI_Model
         if($account_status !== FALSE) {
             $temp_array = array();
             foreach($account_status as $key=>$value) {
-                if( ! in_array($key, $this->_fields_not_to_update())) {
+                if( ! in_array($key, $this->_ignored_fields())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -61,7 +61,7 @@ class Account_status_model extends CI_Model
         if($account_status !== FALSE) {
             $temp_array = array();
             foreach($account_status as $key=>$value) {
-                if( ! in_array($key, $this->_fields_not_to_update())) {
+                if( ! in_array($key, $this->_ignored_fields())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -83,7 +83,7 @@ class Account_status_model extends CI_Model
         }
     }
 
-    private function _fields_not_to_update() {
+    private function _ignored_fields() {
         return array(
             'account_status_id',
             'timestamp',

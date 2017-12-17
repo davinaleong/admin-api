@@ -37,10 +37,7 @@ class Api_authenticate extends CI_Controller {
             );
             //@codeCoverageIgnoreStart
         } else {
-            json_response(
-                'User has invalid access rights.',
-                'error'
-            );
+            json_response_redirect_logout('User has invalid access rights.');
         }
         //@codeCoverageIgnoreEnd
     }
@@ -64,14 +61,11 @@ class Api_authenticate extends CI_Controller {
                 }
             } else {
                 //@codeCoveragerIgnoreEnd
-                json_response_validation_errors();
+                json_response_validation_errors('<li>', '</li>');
             }
             //@codeCoverageIgnoreStart
         } else {
-            json_response(
-                'User has invalid access rights.',
-                'error'
-            );
+            json_response_redirect_logout('User has invalid access rights.');
         }
         //@codeCoverageIgnoreEnd
     }
@@ -122,10 +116,7 @@ class Api_authenticate extends CI_Controller {
             }
             //@codeCoverageIgnoreStart
         } else {
-            json_response(
-                'User has invalid access rights.',
-                'error'
-            );
+            json_response_redirect_logout('User has invalid access rights.');
         }
         //@codeCoverageIgnoreEnd
     }
@@ -150,7 +141,7 @@ class Api_authenticate extends CI_Controller {
                     }
                 } else {
                     //@codeCoveragerIgnoreEnd
-                    json_response_validation_errors();
+                    json_response_validation_errors('<li>', '</li>');
                 }
 
                 $this->load->model('Access_right_model');
@@ -173,10 +164,7 @@ class Api_authenticate extends CI_Controller {
             }
             //@codeCoverageIgnoreStart
         } else {
-            json_response(
-                'User has invalid access rights.',
-                'error'
-            );
+            json_response_redirect_logout('User has invalid access rights.');
         }
         //@codeCoverageIgnoreEnd
     }
@@ -222,7 +210,7 @@ class Api_authenticate extends CI_Controller {
                     }
                 } else {
                     //@codeCoveragerIgnoreEnd
-                    json_response_validation_errors();
+                    json_response_validation_errors('<li>', '</li>');
                 }
 
                 $this->load->model('Access_right_model');
@@ -245,17 +233,14 @@ class Api_authenticate extends CI_Controller {
             }
             //@codeCoverageIgnoreStart
         } else {
-            json_response(
-                'User has invalid access rights.',
-                'error'
-            );
+            json_response_redirect_logout('User has invalid access rights.');
         }
         //@codeCoverageIgnoreEnd
     }
 
     private function _set_rules_reset_password() {
         $this->form_validation->set_rules('new_password', 'New Password', 'trim|required|min_length[' . min_lengths('password') . ']|max_length[' . max_lengths(['password']) . ']');
-        $this->form_validation->set_rules('confirm_new_password', 'Confirm New Password', 'trim|required|min_length[' . min_lengths('password') . ']|max_length[' . max_lengths(['password']) . ']|matches[password]');
+        $this->form_validation->set_rules('confirm_new_password', 'Confirm New Password', 'trim|required|min_length[' . min_lengths('password') . ']|max_length[' . max_lengths(['password']) . ']|matches[new_password]');
     }
 
 } //end Api_authenticate controller class

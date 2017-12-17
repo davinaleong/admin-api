@@ -56,7 +56,7 @@ class Access_right_model extends CI_Model
         if($access_right !== FALSE) {
             $temp_array = array();
             foreach($access_right as $key=>$value) {
-                if( ! in_array($key, $this->_fields_not_to_update())) {
+                if( ! in_array($key, $this->_ignored_fields())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -74,7 +74,7 @@ class Access_right_model extends CI_Model
         if($access_right !== FALSE) {
             $temp_array = array();
             foreach($access_right as $key=>$value) {
-                if( ! in_array($key, $this->_fields_not_to_update())) {
+                if( ! in_array($key, $this->_ignored_fields())) {
                     $temp_array[$key] = $value;
                 }
             }
@@ -96,7 +96,7 @@ class Access_right_model extends CI_Model
         }
     }
 
-    private function _fields_not_to_update() {
+    private function _ignored_fields() {
         return array(
             'access_right_id',
             'timestamp',

@@ -95,10 +95,39 @@ function json_response_validation_errors($prefix='', $suffix='') {
     );
 }
 
-function json_response_page_not_found() {
+function json_response_redirect($message, $status='error') {
     json_response(
-        'Page not found',
-        'error'
+        $message,
+        $status,
+        array(
+            'action' => 'redirect'
+        )
     );
+}
+
+function json_response_redirect_dashboard($message, $status='error') {
+    json_response(
+        $message,
+        $status,
+        array(
+            'action' => 'redirect',
+            'page' => 'dashboard'
+        )
+    );
+}
+
+function json_response_redirect_logout($message, $status='error') {
+    json_response(
+        $message,
+        $status,
+        array(
+            'action' => 'redirect',
+            'page' => 'logout'
+        )
+    );
+}
+
+function json_response_page_not_found() {
+    json_response_redirect_dashboard('Page not found.');
 }
 //end of script

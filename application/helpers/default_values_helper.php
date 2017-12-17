@@ -1,11 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+function get_array_value_by_key($array, $array_key) {
+    $array_key = strtolower($array_key);
+    if($array_key && array_key_exists($array_key, $array)) {
+        return $array[$array_key];
+    } else {
+        return $array;
+    }
+}
+
 function table_names($key) {
     $array = array(
         'Access Right' => 'access_right',
         'Access Rights' => 'access_right',
         'Account Status' => 'account_status',
+        'Account Statuses' => 'account_status',
+        'Users' => 'user',
         'User' => 'user',
         'User Log' => 'user_log'
     );
@@ -41,21 +52,41 @@ function default_access_rights($key) {
     return get_array_value_by_key($array, $key);
 }
 
-function default_account_status() {
-    return array(
-        'Unverified',
-        'Active',
-        'Suspended',
-        'Deactivated'
+function default_account_status($key) {
+    $array = array(
+        'unverified' => 'Unverified',
+        'active' => 'Active',
+        'suspended' => 'Suspended',
+        'deactivated' => 'Deactivated'
     );
+    return get_array_value_by_key($array, $key);
 }
 
-function get_array_value_by_key($array, $array_key) {
-    if($array_key && array_key_exists($array_key, $array)) {
-        return $array[$array_key];
-    } else {
-        return $array;
-    }
+function actions($key) {
+    $array = array(
+        'redirect' => 'redirect'
+    );
+    return get_array_value_by_key($array, $key);
+}
+
+function response_statuses($key) {
+    $array = array(
+        'Failed' => 'error',
+        'Error' => 'error',
+        'Passed' => 'success',
+        'Success' => 'success'
+    );
+    return get_array_value_by_key($array, $key);
+}
+
+function redirect_locations($key) {
+    $array = array(
+        'welcome' => 'dashboard',
+        'dashboard' => 'dashboard',
+        'login' => 'login',
+        'logout' => 'login'
+    );
+    return get_array_value_by_key($array, $key);
 }
 
 //end of script

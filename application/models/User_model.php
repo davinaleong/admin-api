@@ -58,8 +58,8 @@ class User_model extends CI_Model {
             }
 
             $this->db->set('last_updated', now(MYSQL_DATETIME_FORMAT));
-            $this->db->insert($this::TABLE_NAME, $temp_array);
-            return $this->db->insert_id();
+            $this->db->update($this::TABLE_NAME, $temp_array, array('user_id' => $user['user_id']));
+            return $this->db->affected_rows();
         } else {
             return FALSE;
         }

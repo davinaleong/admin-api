@@ -100,8 +100,8 @@ class Api_authenticate extends CI_Controller {
 
     public function json_view_user() {
         if($this->Authentication_model->validate_access_admin()) {
-            $this->form_validation->set_rules('user_id', 'user_id', 'trim|required|in_list[' . $this->User_model->get_ids_as_concatenated_string() . ']');
-            if($user = $this->User_model->get_by_user_id($this->input->post('user_id'))) {
+            $this->form_validation->set_rules('user_hash', 'user_hash', 'trim|required|in_list[' . $this->User_model->get_ids_as_concatenated_string() . ']');
+            if($user = $this->User_model->get_by_user_hash($this->input->post('user_hash'))) {
                 $this->load->model('Access_right_model');
                 $this->load->model('Account_status_model');
 

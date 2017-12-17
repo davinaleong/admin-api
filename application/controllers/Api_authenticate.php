@@ -20,7 +20,7 @@ class Api_authenticate extends CI_Controller {
     }
 
     public function json_login() {
-        if($this->session->userdata('user_id') || $this->session->userdata('access'))
+        if($this->session->userdata('user_hash') || $this->session->userdata('access'))
         {
             $this->_unset_session_data();
         }
@@ -78,15 +78,18 @@ class Api_authenticate extends CI_Controller {
 
     //@codeCoverageIgnoreStart
     private function _set_session_data($user) {
-        $this->session->set_userdata('user_id', $user['user_id']);
+        $this->session->set_userdata('user_hash', $user['user_hash']);
         $this->session->set_userdata('access', $user['access']);
         $this->session->set_userdata('name', $user['name']);
     }
 
     private function _unset_session_data() {
-        if($this->session->userdata('user_id') || $this->session->userdata('access'))
+        if($this->session->userdata('user_id') ||
+            $this->session->userdata('user_hash') ||
+            $this->session->userdata('access'))
         {
             $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('user_hash');
             $this->session->unset_userdata('access');
             $this->session->unset_userdata('name');
         }

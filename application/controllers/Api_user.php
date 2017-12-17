@@ -64,10 +64,7 @@ class Api_authenticate extends CI_Controller {
                 }
             } else {
                 //@codeCoveragerIgnoreEnd
-                json_response(
-                    validation_errors('', ''),
-                    'error'
-                );
+                json_response_validation_errors();
             }
             //@codeCoverageIgnoreStart
         } else {
@@ -104,7 +101,25 @@ class Api_authenticate extends CI_Controller {
     public function json_view_user() {
         if($this->Authentication_model->validate_access_admin()) {
             $this->form_validation->set_rules('user_id', 'user_id', 'trim|required|in_list[' . $this->User_model->get_ids_as_concatenated_string() . ']');
-            if($user = $this->User_model->get_by_user_id($this->input->post('user_id'))) {}
+            if($user = $this->User_model->get_by_user_id($this->input->post('user_id'))) {
+                $this->load->model('Access_right_model');
+                $this->load->model('Account_status_model');
+
+                json_response(
+                    'User record retrieved.',
+                    'success',
+                    array(
+                        'user' => $user,
+                        'access_right_records' => $this->Access_right_model->get_by_ar_values($user['access']),
+                        'account_statuses_record' => $this->Account_status_model->get_by_as_name($user['account_status'])
+                    )
+                );
+            } else {
+                json_response(
+                    'User record not found.',
+                    'error'
+                );
+            }
             //@codeCoverageIgnoreStart
         } else {
             json_response(
@@ -117,7 +132,45 @@ class Api_authenticate extends CI_Controller {
 
     public function json_edit_user() {
         if($this->Authentication_model->validate_access_admin()) {
-            
+            if($user = $this->User_model->get_by_user_id($this->input->post('user_id'))) {
+                $this->_set_rules_edit_user();
+                if($this->form_validation->run()) {
+                    if($this->User_model->update($this->_prepare_edit_user($user))) {
+                        $this->User_log_model->log('User record updated. | user_id: ' . $user_id);
+                        json_response(
+                            'User record updated.',
+                            'success'
+                        );
+                        //@codeCoverageIgnoreStart
+                    } else {
+                        json_response(
+                            'Unable to update User record.',
+                            'error'
+                        );
+                    }
+                } else {
+                    //@codeCoveragerIgnoreEnd
+                    json_response_validation_errors();
+                }
+
+                $this->load->model('Access_right_model');
+                $this->load->model('Account_status_model');
+
+                json_response(
+                    'User record retrieved.',
+                    'success',
+                    array(
+                        'user' => $user,
+                        'access_right_records' => $this->Access_right_model->get_by_ar_values($user['access']),
+                        'account_statuses_record' => $this->Account_status_model->get_by_as_name($user['account_status'])
+                    )
+                );
+            } else {
+                json_response(
+                    'User record not found.',
+                    'error'
+                );
+            }
             //@codeCoverageIgnoreStart
         } else {
             json_response(
@@ -149,7 +202,47 @@ class Api_authenticate extends CI_Controller {
 
     public function json_reset_password() {
         if($this->Authentication_model->validate_access_admin()) {
-            
+            if($user = $this->User_model->get_by_user_id($this->input->post('user_id'))) {
+                $this->_set_rules_reset_password();
+                if($this->form_validation->run()) {
+                    $user['password_hash'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+
+                    if($this->User_model->update($user)) {
+                        $this->User_log_model->log("User's password updated. | user_id: " . $user_id);
+                        json_response(
+                            "User's password updated.",
+                            'success'
+                        );
+                        //@codeCoverageIgnoreStart
+                    } else {
+                        json_response(
+                            'Unable to update User record.',
+                            'error'
+                        );
+                    }
+                } else {
+                    //@codeCoveragerIgnoreEnd
+                    json_response_validation_errors();
+                }
+
+                $this->load->model('Access_right_model');
+                $this->load->model('Account_status_model');
+
+                json_response(
+                    'User record retrieved.',
+                    'success',
+                    array(
+                        'user' => $user,
+                        'access_right_records' => $this->Access_right_model->get_by_ar_values($user['access']),
+                        'account_statuses_record' => $this->Account_status_model->get_by_as_name($user['account_status'])
+                    )
+                );
+            } else {
+                json_response(
+                    'User record not found.',
+                    'error'
+                );
+            }
             //@codeCoverageIgnoreStart
         } else {
             json_response(

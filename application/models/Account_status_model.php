@@ -12,9 +12,18 @@ class Account_status_model extends CI_Model
         return $query->row_array();
     }
 
-    public function get_by_id($account_status_id=FALSE) {
+    public function get_by_account_status_id($account_status_id=FALSE) {
         if($account_status_id !== FALSE) {
             $query = $this->db->get_where($this::TABLE_NAME, array('account_status_id' => $account_status_id));
+            return $query->row_array();
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function get_by_as_name($as_name=FALSE) {
+        if($as_name !== FALSE) {
+            $query = $this->db->get_where($this::TABLE_NAME, array('as_name' => $as_name));
             return $query->row_array();
         } else {
             return FALSE;
@@ -24,7 +33,7 @@ class Account_status_model extends CI_Model
     public function get_statuses_as_concatenated_string($seperator=',') {
         $sql = "
             SELECT GROUP_CONCAT(`as_name` SEPARATOR ?) AS `account_statuses`
-            FROM `account_status`
+            FROM `" .   $this::TABLE_NAME . "`
         ";
         $query = $this->db->query($sql, array($seperator));
         return $query->row_array()['account_statuses'];

@@ -86,6 +86,15 @@ function json_response($message, $status, $additional_data=NULL) {
     $CI->output->set_content_type(content_type('JSON'))->set_output(json_encode($json_response));
 }
 
+function json_response_validation_errors($prefix='', $suffix='') {
+    $CI =& get_instance();
+    $CI->load->library('form_validation');
+    json_response(
+        validation_errors($prefix, $suffix),
+        'error'
+    );
+}
+
 function json_response_page_not_found() {
     json_response(
         'Page not found',

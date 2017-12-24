@@ -67,7 +67,7 @@ class Account_status_model extends CI_Model
             }
 
             $this->db->set('last_updated', now(MYSQL_DATETIME_FORMAT));
-            $this->db->insert($this::TABLE_NAME, $temp_array);
+            $this->db->update($this::TABLE_NAME, $temp_array, array('account_status_id' => $account_status['account_status_id']));
             return $this->db->insert_id();
         } else {
             return FALSE;

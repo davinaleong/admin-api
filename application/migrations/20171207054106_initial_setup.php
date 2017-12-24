@@ -34,7 +34,15 @@ class Migration_Initial_setup extends CI_Migration
 	public function down()
 	{
 		$this->load->model('Script_runner_model');
-		echo $this->Script_runner_model->run_script($this->_down_script())['output_str'];
+		$output = $this->Script_runner_model->run_script($this->_down_script())['output_str'];
+
+		if(ENVIRONMENT !== 'testing')
+		{
+			echo '<html lang="en"><head><title>Admin API - Migrations</title></head><body>';
+			echo '<h1>Migrations</h1>';
+			echo '<code>' . $output . '</code><hr/>';
+			echo '</body></html>';
+		}
 	}
 	
 	// Private Functions ---------------------------------------------------------------

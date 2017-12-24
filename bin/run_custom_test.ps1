@@ -2,6 +2,6 @@ cls
 
 cd "../application/tests"
 
-phpunit --filter "test_"
+phpunit --no-coverage --filter "test_"
 
 cd "../../bin"

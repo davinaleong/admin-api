@@ -79,7 +79,7 @@ class Access_right_model extends CI_Model {
 
             $this->db->set('last_updated', now(MYSQL_DATETIME_FORMAT));
             $this->db->update($this::TABLE_NAME, $temp_array, array('access_right_id' => $access_right['access_right_id']));
-            return $this->db->insert_id();
+            return $this->db->affected_rows();
         } else {
             return FALSE;
         }

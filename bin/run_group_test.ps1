@@ -2,6 +2,6 @@ cls
 
 cd "../application/tests"
 
-phpunit --group untested
+phpunit --no-coverage --group untested
 
 cd "../../bin"

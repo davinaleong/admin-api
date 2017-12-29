@@ -1,6 +1,6 @@
-cls
+Clear-Host
 
-cd "../application/tests"
+Set-Location "../application/tests"
 
 # phpunit
 
@@ -12,9 +12,9 @@ cd "../application/tests"
 
 # --- Models ---
 # phpunit "./models"
-phpunit "./models/Access_right_model_test.php"
-# phpunit "./models/Account_status_model_test.php"
+# phpunit "./models/Access_right_model_test.php"
+phpunit "./models/Account_status_model_test.php"
 # phpunit "./models/Personal_profile_model_test.php"
 # phpunit "./models/User_model_test.php"
 
-cd "../../bin"
+Set-Location "../../bin"

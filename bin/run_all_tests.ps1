@@ -1,7 +1,7 @@
-cls
+Clear-Host
 
-cd "../application/tests"
+Set-Location "../application/tests"
 
 phpunit
 
-cd "../../bin"
+Set-Location "../../bin"

@@ -8,10 +8,10 @@ class User_model extends CI_Model {
     public function get_all($order_by_col='last_updated', $direction='DESC') {
         $this->db->order_by($order_by_col, $direction);
         $query = $this->db->get($this::TABLE_NAME);
-        return $query->row_array();
+        return $query->result_array();
     }
 
-    public function get_by_user_id($user_id=FALSE) {
+    public function get_by_id($user_id=FALSE) {
         if($user_id !== FALSE) {
             $query = $this->db->get_where($this::TABLE_NAME, array('user_id' => $user_id));
             return $query->row_array();

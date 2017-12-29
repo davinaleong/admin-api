@@ -9,10 +9,10 @@ class Account_status_model extends CI_Model
     {
         $this->db->order_by($order_by_col, $direction);
         $query = $this->db->get($this::TABLE_NAME);
-        return $query->row_array();
+        return $query->result_array();
     }
 
-    public function get_by_account_status_id($account_status_id=FALSE) {
+    public function get_by_id($account_status_id=FALSE) {
         if($account_status_id !== FALSE) {
             $query = $this->db->get_where($this::TABLE_NAME, array('account_status_id' => $account_status_id));
             return $query->row_array();
@@ -67,8 +67,9 @@ class Account_status_model extends CI_Model
             }
 
             $this->db->set('last_updated', now(MYSQL_DATETIME_FORMAT));
-            $this->db->update($this::TABLE_NAME, $temp_array, array('account_status_id' => $account_status['account_status_id']));
-            return $this->db->insert_id();
+            $this->db->update($this::TABLE_NAME, $temp_array,
+                array('account_status_id' => $account_status['account_status_id']));
+            return $this->db->affected_rows();
         } else {
             return FALSE;
         }

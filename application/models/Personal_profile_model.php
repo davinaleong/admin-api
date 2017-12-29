@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//@codeCoverageIgnoreStart
 class Personal_profile_model extends CI_Model {
 
     const TABLE_NAME = 'user';
@@ -95,3 +95,4 @@ class Personal_profile_model extends CI_Model {
     }
 
 } //end Personal_profile_model class
+//@codeCoverageIgnoreEnd

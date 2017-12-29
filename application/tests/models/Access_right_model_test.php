@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Access_right_model_test extends TestCase {
-    const DO_ECHO = TRUE;//DO_TEST_ECHO_GLOBAL;
+    const DO_ECHO = DO_TEST_ECHO_GLOBAL;
     const TABLE_NAME = 'access_right';
 
     public function setUp() {
@@ -55,7 +55,7 @@ class Access_right_model_test extends TestCase {
         $this->assertFalse($CI->Access_right_model->get_by_ar_value(FALSE));
     }
 
-    public function test_get_values_as_concatenated_string($seperator=',') {
+    public function test_get_values_as_concatenated_string() {
         if($this::DO_ECHO) echo "\n+++ test_get_values_as_concatenated_string +++\n";
         $CI =& get_instance();
         $CI->load->model('Access_right_model');
@@ -63,7 +63,7 @@ class Access_right_model_test extends TestCase {
         $this->assertContains('A', $CI->Access_right_model->get_values_as_concatenated_string());
     }
 
-    public function test_insert($access_right=FALSE) {
+    public function test_insert() {
         if($this::DO_ECHO) echo "\n+++ test_insert +++\n";
         $CI =& get_instance();
         $CI->load->model('Access_right_model');
@@ -77,7 +77,7 @@ class Access_right_model_test extends TestCase {
         $this->assertFalse($CI->Access_right_model->insert(FALSE));
     }
 
-    public function test_update($access_right=FALSE) {
+    public function test_update() {
         if($this::DO_ECHO) echo "\n+++ test_update +++\n";
         $CI =& get_instance();
         $CI->load->model('Access_right_model');
@@ -89,7 +89,7 @@ class Access_right_model_test extends TestCase {
         $this->assertFalse($CI->Access_right_model->update(FALSE));
     }
 
-    public function test_delete_by_id($access_right_id=FALSE) {
+    public function test_delete_by_id() {
         if($this::DO_ECHO) echo "\n+++ test_delete_by_id +++\n";
         $CI =& get_instance();
         $CI->load->model('Access_right_model');
@@ -98,7 +98,7 @@ class Access_right_model_test extends TestCase {
         $this->assertFalse($CI->Access_right_model->delete_by_id(FALSE));
     }
 
-    public function test_delete_by_ar_value($access_right_ar_value=FALSE) {
+    public function test_delete_by_ar_value() {
         if($this::DO_ECHO) echo "\n+++ test_delete_by_ar_value +++\n";
         $CI =& get_instance();
         $CI->load->model('Access_right_model');

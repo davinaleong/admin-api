@@ -94,7 +94,7 @@ class Api_authenticate extends CI_Controller {
 
     public function json_view_user() {
         if($this->Authentication_model->validate_access_admin()) {
-            $this->form_validation->set_rules('user_hash', 'user_hash', 'trim|required|in_list[' . $this->User_model->get_ids_as_concatenated_string() . ']');
+            $this->form_validation->set_rules('user_hash', 'user_hash', 'trim|required');
             if($user = $this->User_model->get_by_user_hash($this->input->post('user_hash'))) {
                 $this->load->model('Access_right_model');
                 $this->load->model('Account_status_model');
@@ -123,7 +123,8 @@ class Api_authenticate extends CI_Controller {
 
     public function json_edit_user() {
         if($this->Authentication_model->validate_access_admin()) {
-            if($user = $this->User_model->get_by_user_id($this->input->post('user_id'))) {
+            $this->form_validation->set_rules('user_hash', 'user_hash', 'trim|required');
+            if($user = $this->User_model->get_by_user_hash($this->input->post('user_hash'))) {
                 $this->_set_rules_edit_user();
                 if($this->form_validation->run()) {
                     if($this->User_model->update($this->_prepare_edit_user($user))) {
@@ -190,7 +191,8 @@ class Api_authenticate extends CI_Controller {
 
     public function json_reset_password() {
         if($this->Authentication_model->validate_access_admin()) {
-            if($user = $this->User_model->get_by_user_id($this->input->post('user_id'))) {
+            $this->form_validation->set_rules('user_hash', 'user_hash', 'trim|required');
+            if($user = $this->User_model->get_by_user_hash($this->input->post('user_hash'))) {
                 $this->_set_rules_reset_password();
                 if($this->form_validation->run()) {
                     $user['password_hash'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);

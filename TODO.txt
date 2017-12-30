@@ -8,7 +8,7 @@ TODO List:
 A. Datetime helper
 B. Tables for Admin:
     - Access Rights
-    - Account Statuses
+    - Statuses
     - User
     - User Log
 C. Migrations
@@ -20,8 +20,9 @@ D. Models:
         - ar_description
         - timestamp
         - last_updated
-    - Account Statuses
-        - account_status_id
+    - Statuses
+        - status_id
+        - status_type (Account, Sign Up Hash)
         - as_value
         - as_description
         - timestamp
@@ -29,16 +30,21 @@ D. Models:
     - User
         - user_id
         - username
-        - name
+        - name (Super Admin, Default Admin, Default User, Davina Leong)
         - password_hash
-        - access_rights
-        - account_status
+        - access_rights (S, A, M, U)
+        - account_status (Unverified, Active, Suspended, Deactivated)
         - timestamp
         - last_updated
     - User Log
         - user_log_id
         - user_id
         - log
+        - timestamp
+    - Sign Up Hash
+        - suh_id
+        - hash
+        - status (Unverified, Verified, Expired)
         - timestamp
 E. Controllers:
     - Authenticate

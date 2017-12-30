@@ -34,7 +34,15 @@ class Migration_Initial_setup extends CI_Migration
 	public function down()
 	{
 		$this->load->model('Script_runner_model');
-		echo $this->Script_runner_model->run_script($this->_down_script())['output_str'];
+		$output = $this->Script_runner_model->run_script($this->_down_script())['output_str'];
+
+		if(ENVIRONMENT !== 'testing')
+		{
+			echo '<html lang="en"><head><title>Admin API - Migrations</title></head><body>';
+			echo '<h1>Migrations</h1>';
+			echo '<code>' . $output . '</code><hr/>';
+			echo '</body></html>';
+		}
 	}
 	
 	// Private Functions ---------------------------------------------------------------
@@ -51,6 +59,7 @@ class Migration_Initial_setup extends CI_Migration
 			
 			CREATE TABLE `user` (
 				`user_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+				`user_hash` VARCHAR(32) DEFAULT NULL,
 				`username` VARCHAR(64) DEFAULT NULL,
 				`name` VARCHAR(64) DEFAULT NULL,
 				`password_hash` VARCHAR(128) DEFAULT NULL,
@@ -73,7 +82,7 @@ class Migration_Initial_setup extends CI_Migration
 				`access_right_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 				`ar_name` VARCHAR(64) DEFAULT NULL,
 				`ar_value` VARCHAR(8) DEFAULT NULL,
-				`ar_description` VARCHAR(128) DEFAULT NULL,
+				`ar_color` VARCHAR(64) DEFAULT NULL,
 				`timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				`last_updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				PRIMARY KEY (`access_right_id`)
@@ -81,12 +90,25 @@ class Migration_Initial_setup extends CI_Migration
 
 			CREATE TABLE `account_status` (
 				`account_status_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-				`ar_value` VARCHAR(64) DEFAULT NULL,
-				`as_description` VARCHAR(64) DEFAULT NULL,
+				`as_name` VARCHAR(64) DEFAULT NULL,
+				`as_color` VARCHAR(64) DEFAULT NULL,
+				`as_description` VARCHAR(128) DEFAULT NULL,
 				`timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				`last_updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				PRIMARY KEY (`account_status_id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+			INSERT INTO `access_right` (`ar_value`, `ar_name`, `ar_color`)
+			VALUES ('A', 'Admin', 'primary');
+
+			INSERT INTO `account_status` (`as_name`, `as_color`, `as_description`)
+			VALUES ('Active', 'success', 'Account has usage to the system as his/her access rights allow.');
+
+			INSERT INTO `user_log` (`user_id`, `log`)
+			VALUES (0, 'Access Right record created from migrations. | access_right_id: 1'),
+				(0, 'Account Status created from migrations. | account_status_id: 1'),
+				(0, 'User record created from migrations. | user_id: 1');
 		";
 		return $sql;
 	}

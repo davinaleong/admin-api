@@ -25,3 +25,5 @@ function format_system($datetime_str='', $time_zone=DATETIME_ZONE) {
 function format_default($datetime_str='', $time_zone=DATETIME_ZONE) {
     return format($datetime_str, DISPLAY_DATETIME_FORMAT, DATETIME_ZONE);
 }
+
+//end of script
